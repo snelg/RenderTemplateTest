@@ -22,11 +22,11 @@
 
 {{/*Lets you override the "content" block in the layout */}}
 {{define "content"}}
-    {{template "table" .UsersTable}}
+    {{table "rows.users.slot" .UsersTable}}
 
     <p>Between…</p>
 
-    {{template "table" .OrdersTable}}
+    {{table "rows.orders.slot" .OrdersTable}}
     {{/*  The render function cannot stream  */}}
 {{end}}
 

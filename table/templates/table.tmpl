@@ -1,0 +1,12 @@
+<table class="{{.Class}}">
+    <thead>
+        <tr>
+            {{range .Headers}}
+                <th>{{.Label}}</th>
+            {{end}}
+        </tr>
+    </thead>
+    <tbody>
+        {{renderRows .TemplateKey .Rows}}
+    </tbody>
+</table>
