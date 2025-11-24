@@ -1,0 +1,10 @@
+{{define "table"}}
+    <table class="{{.Class}}">
+        <thead>
+        <tr>{{range .Headers}}<th>{{.}}</th>{{end}}</tr>
+        </thead>
+        <tbody>
+        {{.Body}}
+        </tbody>
+    </table>
+{{end}}
