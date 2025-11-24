@@ -4,7 +4,7 @@
         <tr>{{range .Headers}}<th>{{.}}</th>{{end}}</tr>
         </thead>
         <tbody>
-        {{.Body}}
+        {{render .TemplateID .Rows}}
         </tbody>
     </table>
 {{end}}

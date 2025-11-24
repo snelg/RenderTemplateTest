@@ -22,19 +22,11 @@
 
 {{/*Lets you override the "content" block in the layout */}}
 {{define "content"}}
-    {{template "table" (params
-    "Headers" (slice "Name" "Email")
-    "Class"   "striped"
-    "Body"    (render "rows.users.slot" .Users)
-    )}}
+    {{template "table" .UsersTable}}
 
     <p>Between…</p>
 
-    {{template "table" (params
-    "Headers" (slice "Order #" "Total")
-    "Class"   ""
-    "Body"    (render "rows.orders.slot" .Orders)
-    )}}
+    {{template "table" .OrdersTable}}
     {{/*  The render function cannot stream  */}}
 {{end}}
 
