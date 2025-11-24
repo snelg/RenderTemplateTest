@@ -16,11 +16,11 @@ type Order struct {
 	Total string
 }
 
-type TableData struct {
+type TableData[T any] struct {
 	Headers    []string
 	Class      string
 	TemplateID string
-	Rows       any
+	Rows       []T
 }
 
 var tpl *template.Template // shared template set
@@ -51,16 +51,16 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := struct {
-			UsersTable  TableData
-			OrdersTable TableData
+			UsersTable  TableData[User]
+			OrdersTable TableData[Order]
 		}{
-			UsersTable: TableData{
+			UsersTable: TableData[User]{
 				Headers:    []string{"Name", "Email"},
 				Class:      "striped",
 				TemplateID: "rows.users.slot",
 				Rows:       []User{{"Ada", "ada@example.com"}, {"Linus", "linus@example.com"}},
 			},
-			OrdersTable: TableData{
+			OrdersTable: TableData[Order]{
 				Headers:    []string{"Order #", "Total"},
 				TemplateID: "rows.orders.slot",
 				Rows:       []Order{{"A123", "$25.99"}, {"B456", "$79.99"}},
