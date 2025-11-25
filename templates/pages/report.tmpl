@@ -1,34 +1,29 @@
+{{template "layout" .}}
+
 {{/* Page blocks */}}
 {{define "title"}}Users & Orders{{end}}
 
-
-
-{{/* Define slot values */}}
-{{define "rows.users.slot"}}
-    {{range .}}
-    <tr>
-        <td>{{.Name}}</td>
-        <td>{{.Email}}</td>
-    </tr>{{end}}
-{{end}}
-
-{{define "rows.orders.slot"}}
-    {{range .}}
-    <tr>
-        <td>{{.ID}}</td>
-        <td>{{.Total}}</td>
-    </tr>{{end}}
-{{end}}
-
 {{/*Lets you override the "content" block in the layout */}}
 {{define "content"}}
-    {{table "rows.users.slot" .UsersTable}}
+    {{with .UsersTable}}
+        {{template "table/start" .}}
+        {{range .Rows}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>{{.Email}}</td>
+            </tr>
+        {{end}}
+        {{template "table/end" .}}
+    {{end}}
 
     <p>Between…</p>
 
-    {{table "rows.orders.slot" .OrdersTable}}
-    {{/*  The render function cannot stream  */}}
+    {{template "table/start" .OrdersTable}}
+    {{range .OrdersTable.Rows}}
+        <tr>
+            <td>{{.ID}}</td>
+            <td>{{.Total}}</td>
+        </tr>
+    {{end}}
+    {{template "table/end" .}}
 {{end}}
-
-{{/* PAGE ENTRYPOINT: execute this; it invokes the layout */}}
-{{define "report"}}{{template "layout" .}}{{end}}
