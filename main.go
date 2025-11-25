@@ -17,14 +17,19 @@ type Order struct {
 	Total string
 }
 
+type PageData struct {
+	UsersTable  table.TableData[User]
+	OrdersTable table.TableData[Order]
+}
+
 func mustParseTemplates() *template.Template {
 	tpl := template.New("")
-	template.Must(table.AddTableTemplate(tpl))
 	// Parse component + layout first, then the page so its defines override blocks.
 	template.Must(tpl.ParseFiles(
 		"templates/layouts/base.tmpl",
 		"templates/pages/report.tmpl",
 	))
+	template.Must(table.AddTableTemplate(tpl))
 	return tpl
 }
 
@@ -32,10 +37,7 @@ func main() {
 	tpl := mustParseTemplates()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		data := struct {
-			UsersTable  table.TableData[User]
-			OrdersTable table.TableData[Order]
-		}{
+		data := PageData{
 			UsersTable: table.TableData[User]{
 				Headers: []table.Header{{Label: "Name"}, {Label: "Email"}},
 				Class:   "striped",

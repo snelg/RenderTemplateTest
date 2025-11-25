@@ -1,10 +1,9 @@
-{{template "layout" .}}
-
-{{/* Page blocks */}}
+{{/* gotype: TableRenderTest.PageData */}}
 {{define "title"}}Users & Orders{{end}}
 
-{{/*Lets you override the "content" block in the layout */}}
-{{define "content"}}
+{{/* main content */}}
+{{template "layout/start" .}}
+
     {{with .UsersTable}}
         {{template "table/start" .}}
         {{range .Rows}}
@@ -26,4 +25,5 @@
         </tr>
     {{end}}
     {{template "table/end" .}}
-{{end}}
+
+{{template "layout/end" .}}
