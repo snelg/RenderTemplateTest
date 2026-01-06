@@ -4,26 +4,24 @@
 {{/* main content */}}
 {{template "layout/START" .}}
 
-    {{with .UsersTable}}
-        {{template "table/START" .}}
-        {{range .Rows}}
+    {{template "table/START" .UsersTable}}
+        {{range .Users}}
             <tr>
                 <td>{{.Name}}</td>
                 <td>{{.Email}}</td>
             </tr>
         {{end}}
-        {{template "table/END" .}}
-    {{end}}
+    {{template "table/END" .}}
 
     <p>Between…</p>
 
     {{template "table/START" .OrdersTable}}
-    {{range .OrdersTable.Rows}}
-        <tr>
-            <td>{{.ID}}</td>
-            <td>{{.Total}}</td>
-        </tr>
-    {{end}}
+        {{range .Orders}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Total}}</td>
+            </tr>
+        {{end}}
     {{template "table/END" .}}
 
 {{template "layout/END" .}}

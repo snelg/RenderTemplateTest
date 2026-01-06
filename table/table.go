@@ -8,10 +8,9 @@ import (
 //go:embed templates
 var tableFiles embed.FS
 
-type TableData[T any] struct {
+type TableConfig struct {
 	Headers []Header
 	Class   string
-	Rows    []T
 }
 
 type Header struct {

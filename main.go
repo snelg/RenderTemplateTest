@@ -18,8 +18,10 @@ type Order struct {
 }
 
 type PageData struct {
-	UsersTable  table.TableData[User]
-	OrdersTable table.TableData[Order]
+	UsersTable  table.TableConfig
+	Users       []User
+	OrdersTable table.TableConfig
+	Orders      []Order
 }
 
 func mustParseTemplates() *template.Template {
@@ -38,15 +40,15 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := PageData{
-			UsersTable: table.TableData[User]{
+			UsersTable: table.TableConfig{
 				Headers: []table.Header{{Label: "Name"}, {Label: "Email"}},
 				Class:   "striped",
-				Rows:    []User{{"Ada", "ada@example.com"}, {"Linus", "linus@example.com"}},
 			},
-			OrdersTable: table.TableData[Order]{
+			Users: []User{{"Ada", "ada@example.com"}, {"Linus", "linus@example.com"}},
+			OrdersTable: table.TableConfig{
 				Headers: []table.Header{{Label: "Order #"}, {Label: "Total"}},
-				Rows:    []Order{{"A123", "$25.99"}, {"B456", "$79.99"}},
 			},
+			Orders: []Order{{"A123", "$25.99"}, {"B456", "$79.99"}},
 		}
 		// Execute the PAGE entrypoint; the page calls the layout internally.
 		if err := tpl.ExecuteTemplate(w, "report.tmpl", data); err != nil {
