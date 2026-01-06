@@ -1,16 +1,17 @@
-{{define "table/start"}}
-<table class="{{.Class}}">
-    <thead>
-        <tr>
-            {{range .Headers}}
-                <th>{{.Label}}</th>
-            {{end}}
-        </tr>
-    </thead>
-    <tbody>
+{{/* gotype: TableRenderTest/table.TableData */}}
+{{define "table/START"}}
+    <table class="{{.Class}}">
+        <thead>
+            <tr>
+                {{range .Headers}}
+                    <th>{{.Label}}</th>
+                {{end}}
+            </tr>
+        </thead>
+        <tbody>
 {{end}}
 
-{{define "table/end"}}
-    </tbody>
-</table>
+{{define "table/END"}}
+        </tbody>
+    </table>
 {{end}}
